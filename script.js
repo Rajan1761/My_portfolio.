@@ -11,7 +11,7 @@ document.querySelectorAll('a,button,.btn,.skill-tab,.chat-sug,.social-btn,.conta
   el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-grow'));
   el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-grow'));
 });
-npx plugins add vercel/vercel-plugin
+
 // ═══════════════════════════════════════
 // THEME TOGGLE
 // ═══════════════════════════════════════
