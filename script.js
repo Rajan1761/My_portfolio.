@@ -52,28 +52,6 @@ export default async function handler(req, res) {
   }
 }
 
-//////
-async function callClaude(userMsg){
-  showTyping();
-  document.getElementById('chatSuggestions').style.display='none';
-
-  try{
-    const res = await fetch('/api/chat', {
-      method:'POST',
-      headers:{ 'Content-Type':'application/json' },
-      body: JSON.stringify({ message: userMsg })
-    });
-
-    const data = await res.json();
-    hideTyping();
-
-    addMsg('bot', data.reply || "No response from AI");
-
-  }catch(e){
-    hideTyping();
-    addMsg('bot','⚠️ AI server error. Try again later.');
-  }
-}
 
 ///////
 // ═══════════════════════════════════════
