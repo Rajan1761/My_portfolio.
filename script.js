@@ -237,6 +237,36 @@ function sendChat(){
   input.value='';
   callClaude(msg);
 }
+function generateReply(userMsg){
+  const msg = userMsg.toLowerCase();
+
+  if(msg.includes('name')) return "My name is Rajan G, a Computer Science Engineer and Digital Marketing professional.";
+
+  if(msg.includes('location')) return "Rajan is based in Chennai, Tamil Nadu, India.";
+
+  if(msg.includes('skill')) return "Rajan has skills in Python, SQL, AI/ML, Digital Marketing, and Blockchain Security.";
+
+  if(msg.includes('project')) return "Rajan built a Blockchain-based Electronic Health Records Authentication system for secure healthcare data.";
+
+  if(msg.includes('education')) return "Rajan completed B.E. in Computer Science and is currently pursuing M.E. at Anna University.";
+
+  if(msg.includes('contact') || msg.includes('email')) return "You can contact Rajan at rr731147@gmail.com or via WhatsApp.";
+
+  if(msg.includes('job') || msg.includes('work')) return "Rajan is currently working as a Social Media Manager at Facebook, Chennai.";
+
+  return "I'm here to help you know about Rajan G. Ask me about his skills, projects, education, or experience!";
+}
+
+function callClaude(userMsg){
+  showTyping();
+  document.getElementById('chatSuggestions').style.display='none';
+
+  setTimeout(()=>{
+    hideTyping();
+    const reply = generateReply(userMsg);
+    addMsg('bot', reply);
+  }, 800);
+}
 
 function sendSuggestion(msg){
   addMsg('user',msg);
