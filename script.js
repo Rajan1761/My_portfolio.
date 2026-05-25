@@ -11,7 +11,48 @@ document.querySelectorAll('a,button,.btn,.skill-tab,.chat-sug,.social-btn,.conta
   el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-grow'));
   el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-grow'));
 });
+//new update api
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
 
+  const { message } = req.body;
+
+  try {
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
+      },
+      body: JSON.stringify({
+        model: "gpt-4o-mini",
+        messages: [
+          {
+            role: "system",
+            content: "You are an AI assistant for Rajan G portfolio. Answer only about Rajan."
+          },
+          {
+            role: "user",
+            content: message
+          }
+        ],
+        max_tokens: 150
+      })
+    });
+
+    const data = await response.json();
+    const reply = data.choices?.[0]?.message?.content || "No response";
+
+    res.status(200).json({ reply });
+
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+}
+
+///////
 // ═══════════════════════════════════════
 // THEME TOGGLE
 // ═══════════════════════════════════════
